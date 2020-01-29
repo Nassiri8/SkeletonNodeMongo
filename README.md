@@ -1,11 +1,12 @@
-#Skeleton API Node.JS MongoDB
-# SkeletonNodeMongo
+  # SkeletonNodeMongo
 
-#CMD:
-npm i
-npm start app.js
+  #CMD:
 
-#Information:
-Le cluster MongoDB est un cluster test gratuit et limité à 500Mo.
+    npm i
+    npm start app.js
 
-The MongoDB cluster is a free cluster test limited to 500MB.
+  #Information:
+
+    Le cluster MongoDB est un cluster test gratuit et limité à 500Mo.
+
+    The MongoDB cluster is a free cluster test limited to 500MB.
