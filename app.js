@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const fetch = require('node-fetch');
+const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectID;
+//const fetch = require('node-fetch');
 'use strict';
 
+const CONNECTION_URL = "mongodb+srv://nour:nour@nourtest-7owds.mongodb.net/test?retryWrites=true&w=majority";
+const DATABASE_NAME = "test";
 //cryptage pwd
 const crypto = require('crypto');
 
@@ -16,20 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
-//option cors
 
-var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200
-}
-
-// Configuring the database
-var dbConfig = require('./config/database.config.js');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.url);
+mongoose.connect(CONNECTION_URL);
 
 mongoose.connection.on('error', function() {
     console.log('Could not connect to the database. Exiting now...');
@@ -38,7 +33,6 @@ mongoose.connection.on('error', function() {
 mongoose.connection.once('open', function() {
     console.log("Successfully connected to the database");
 })
-
 //code pour crypter en sha512
 
 var sha512 = function(password, salt){
@@ -53,9 +47,24 @@ var sha512 = function(password, salt){
 
 //routes:
 require('./src/routes/user.routes.js')(app);
-require('./src/routes/dialog.routes.js')(app);
+
+app.get('/', function (req, res, test) {
+    console.log(test)
+    res.json({
+        status: 'API Its Working',
+        message: 'Welcome to AdriverAPI!'
+    });
+});
 
 // listen for requests
-app.listen(3000, function() {
-    console.log("Server is listening on port 3000");
+app.listen(3000, () => {
+    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
+        if(error) {
+            throw error;
+        }
+        database = client.db(DATABASE_NAME);
+        //collection = database.collection("people");
+        console.log("Connected to `" + DATABASE_NAME + "`!");
+        console.log("Server is listening on port 3000");
+    });
 });

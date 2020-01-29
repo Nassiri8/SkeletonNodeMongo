@@ -15,5 +15,14 @@
     "mongoose": "^5.0.16",
     "node-fetch": "^2.1.2",
     "nodemon": "^1.17.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nassiri8/SkeletonNodeMongo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nassiri8/SkeletonNodeMongo/issues"
+  },
+  "homepage": "https://github.com/Nassiri8/SkeletonNodeMongo#readme"
 }
